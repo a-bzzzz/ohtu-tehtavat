@@ -2,7 +2,7 @@
 name = "nhl-statistics-1"
 version = "0.1.0"
 description = ""
-authors = ["Kalle Ilves <kalleilv@helsinki.fi>"]
+authors = ["Asta Björk <asta.bjork@helsinki.fi>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
