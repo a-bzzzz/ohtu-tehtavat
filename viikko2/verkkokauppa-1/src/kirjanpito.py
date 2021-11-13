@@ -1,3 +1,5 @@
+tapahtumat = []
+
 class Kirjanpito:
     # __instanssi = None
     #
@@ -7,11 +9,19 @@ class Kirjanpito:
     #         Kirjanpito.__instanssi = Kirjanpito()
     #
     #     return Kirjanpito.__instanssi
-
-    kirjanpito = Kirjanpito()
+  
 
     def __init__(self):
-        self.tapahtumat = []
+        self.tapahtumat = tapahtumat
 
     def lisaa_tapahtuma(self, tapahtuma):
         self.tapahtumat.append(tapahtuma)
+        # print(self.tapahtumat[-1])
+
+    # Mahdollisesti voisi käyttää erillistä metodia..
+    # def hae_tapahtumat(self):
+    #     # for tapahtuma in self.tapahtumat:
+    #     #     print(tapahtuma)
+    #     return self.tapahtumat
+
+kirjanpito = Kirjanpito()
