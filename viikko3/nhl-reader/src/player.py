@@ -15,5 +15,5 @@ class Player:
             f"\t{self.team:5}"
             f"{(self.goals):2}"
             f" + {(self.assists):2}"
-            f" = {(self.points):2}"
+            f" = {(self.points):3}"
         )
