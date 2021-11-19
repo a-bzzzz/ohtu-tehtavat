@@ -2,7 +2,7 @@ from entities.user import User
 from repositories.user_repository import (
     user_repository as default_user_repository
 )
-
+import re
 
 class UserInputError(Exception):
     pass
@@ -39,8 +39,11 @@ class UserService:
     def validate(self, username, password, password_confirmation):
         if not username or not password:
             raise UserInputError("Username and password are required")
-
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
-
+        cre = re.compile('^[a-z]{3,}$')
+        pwd = re.compile('[a-z0-9^a-z]{8,}')
+        if not cre.match(username):
+            raise UserInputError("Username is in wrong format!")
+        if not pwd.match(password):
+            raise UserInputError("Password is in wrong format!")
 
 user_service = UserService()

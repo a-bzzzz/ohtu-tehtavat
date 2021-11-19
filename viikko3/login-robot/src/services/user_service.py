@@ -37,7 +37,7 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
         cre = re.compile('^[a-zA-Z]{3,}$')
-        pwd = re.compile('^(([a-zA-Z]+[0-9]+)|([0-9]+[a-zA-Z]+))[0-9a-zA-Z]*$')
+        pwd = re.compile('[a-z0-9^a-z]{8,}')
         if not cre.match(username):
             raise UserInputError("Username is in wrong format!")
         if not pwd.match(password):
