@@ -23,9 +23,24 @@ Register With Valid Username And Too Short Password
     Submit Credentials
     Register Should Fail With Message  Password is in wrong format!
 
+Login After Successful Registration
+    Set Username  mym
+    Set Password  123mym45
+    Submit Credentials
+    Login Should Succeed
+
+Login After Failed Registration
+    Set Username  myy
+    Set Password  p1kku
+    Submit Credentials
+    Login Should Fail With Message  Password is in wrong format!
+
 *** Keywords ***
 Submit Credentials
     Click Button  Register
+
+Submit Login Credentials
+    Click Button  Login
 
 Set Username
     [Arguments]  ${username}
@@ -43,3 +58,10 @@ Register Should Fail With Message
     Register Page Should Be Open
     Page Should Contain  ${message}
 
+Login Should Succeed
+    Welcome Page Should Be Open
+
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Register Page Should Be Open
+    Page Should Contain  ${message}
