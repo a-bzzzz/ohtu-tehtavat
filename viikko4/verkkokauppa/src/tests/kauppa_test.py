@@ -86,3 +86,36 @@ class TestKauppa(unittest.TestCase):
         # varmistetaan, että metodia tilimaksu on kutsuttu
         self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", "33333-44455", 5)
         # self.pankki_mock.tilisiirto.assert_not_called()
+
+    def test_aloita_asiointi_nollaa_edellisen_ostoskorin(self):
+        # tehdään ostokset
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+        self.kauppa.aloita_asiointi()
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        # varmistetaan, että ostoskorin summa ilman ostoksia on nolla
+        self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", "33333-44455", 0)
+
+    def test_uusi_viitenumero_uudelle_maksutapahtumalle(self):
+        # tehdään ostokset
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.tilimaksu("pekka", "12345")
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        # varmistetaan, että viitegeneraattoria kutsutaan kumpaakin ostoskertaa varten erikseen
+        self.assertEqual(self.viitegeneraattori_mock.uusi.call_count, 2)
+
+    def test_poistaa_tuotteen_oikein(self):
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.poista_korista(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        # varmistetaan, että tuotteen poiston jälkeen ostoskori maksetaan oikein
+        self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", "33333-44455", 5)
