@@ -122,4 +122,4 @@ class TestKauppa(unittest.TestCase):
         kauppa.maksa("4321")
 
         # ...ja kolmas viite
-        pankki_mock.maksa.assert_called_with(ANY, ANY, 4)
+        pankki_mock.maksa.assert_called_with(ANY, ANY, 3)
