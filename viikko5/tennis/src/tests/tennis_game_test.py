@@ -1,6 +1,8 @@
+"""Unit tests for Tennis Game"""
 import unittest
 
 from tennis_game import TennisGame
+from player import Player
 
 test_cases = [
     (0, 0, "Love-All"),
@@ -45,17 +47,22 @@ test_cases = [
 
 
 def play_game(p1_points, p2_points):
-    game = TennisGame("player1", "player2")
+    """Unit test: Play a game"""
+    player1 = Player("player1")
+    player2 = Player("player2")
+    game = TennisGame(player1, player2)
     for i in range(max(p1_points, p2_points)):
         if i < p1_points:
-            game.won_point("player1")
+            game.won_point(player1)
         if i < p2_points:
-            game.won_point("player2")
+            game.won_point(player2)
     return game
 
 
 class TestTennis(unittest.TestCase):
+    """Unit Test Case - Tennis Game"""
     def test_score(self):
+        """Unit test: Check scores"""
         for test_case in test_cases:
             (p1_points, p2_points, score) = test_case
             game = play_game(p1_points, p2_points)
