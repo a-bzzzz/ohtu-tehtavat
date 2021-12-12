@@ -44,16 +44,16 @@ class Not:
         
         return False
 
-# class Or:
-#     def __init__(self, *matchers):
-#         self._matchers = matchers
+class Or:
+    def __init__(self, *matchers):
+        self._matchers = matchers
 
-#     def matches(self, player):
-#         for matcher in self._matchers:
-#             if matcher.matches(player):
-#                 return True
+    def matches(self, player):
+        for matcher in self._matchers:
+            if matcher.matches(player):
+                return True
         
-#         return False
+        return False
 
 class HasFewerThan:
     def __init__(self, value, attr):

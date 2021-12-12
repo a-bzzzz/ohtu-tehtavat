@@ -1,4 +1,4 @@
-from matchers import And, HasAtLeast, PlaysIn, All, Not, HasFewerThan as matcher
+from matchers import And, HasAtLeast, PlaysIn, All, Not, HasFewerThan, Or as matcher
 
 class QueryBuilder:
     def __init__(self, matcher = All):
