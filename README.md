@@ -6,4 +6,5 @@ Ohjelmistotuotanto-kurssin laskaritehtävät:
 2. viikko tehtävät 1-2, 8-12
 3. viikko tehtävät 1-11
 4. viikko tehtävät 1-7
+5. viikko tehtävät 3-6
 
