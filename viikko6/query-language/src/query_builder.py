@@ -2,7 +2,19 @@ from matchers import And, HasAtLeast, PlaysIn, All, Not, HasFewerThan, Or as mat
 
 class QueryBuilder:
     def __init__(self, matcher = All):
-        self.matcher = matcher
+        self._matcher = matcher
 
     def build(self):
-        return self.matcher
+        return self._matcher
+
+    def _and(self, matcher = And):
+        return QueryBuilder(And(self._matcher, matcher))
+
+    def playsIn(self, team):
+        return QueryBuilder(And(self._matcher, PlaysIn(team)))
+
+    def hasAtLeast(self, value, attr):
+        return QueryBuilder(And(self._matcher, HasAtLeast(value,attr)))
+
+    def hasFewerThan(self, value, attr):
+        return QueryBuilder(And(self._matcher, HasFewerThan(value,attr)))

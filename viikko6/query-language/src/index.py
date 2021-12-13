@@ -29,17 +29,19 @@ def main():
     #     HasAtLeast(50, "assists")
     # )
 
-    matcher = And(
-        HasAtLeast(40, "points"),
-        Or(
-            PlaysIn("NYR"),
-            PlaysIn("NYI"),
-            PlaysIn("BOS")
-        )
-    )
+    # matcher = And(
+    #     HasAtLeast(40, "points"),
+    #     Or(
+    #         PlaysIn("NYR"),
+    #         PlaysIn("NYI"),
+    #         PlaysIn("BOS")
+    #     )
+    # )
 
-    # query = QueryBuilder()
+    query = QueryBuilder()
     # matcher = query.build()
+    # matcher = query.playsIn("NYR").build()
+    matcher = query.playsIn("NYR").hasAtLeast(5, "goals").hasFewerThan(10, "goals").build()
 
     for player in stats.matches(matcher):
         print(player)
